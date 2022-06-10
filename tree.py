@@ -7,10 +7,10 @@ pwd=str(check_output('pwd'))[2:-3]
 
 #some stuff i stole from the original tree
 #pipe="|   " #i obv didnt steal this one lol
-pipe='│' #welp i ended up stealing it lol
-chrta="├" 
-finalchrta="└"
-khtota = "──"
+v_pipe='│' #welp i ended up stealing it lol
+mid_node="├" 
+final_node="└"
+h_pipe = "──"
 #returns a 2d list of the form [[file/dir, name],...]
 def _ls(pwd):
     buffer=str(check_output(['ls', '-l',pwd]))[2:-3].split('\\n')[1:]
@@ -31,9 +31,9 @@ def printarr(array):
 def tree(pwd=pwd,arr=[]):
     ls = _ls(pwd)
     lslen=len(ls)
-    arr+=[[chrta,khtota]]
+    arr+=[[mid_node,h_pipe]]
     for i in range(lslen):
-        if i>=lslen-1: arr[-1][0]=finalchrta
+        if i>=lslen-1: arr[-1][0]=final_node
         if ls[i][0]=='-':
             printarr(arr)
             print(ls[i][1])
@@ -41,7 +41,7 @@ def tree(pwd=pwd,arr=[]):
             printarr(arr)
             print(ls[i][1])
             if i<lslen-1:
-                tree(pwd+'/'+ls[i][1],arr[:-1]+[[pipe,'   ']])
+                tree(pwd+'/'+ls[i][1],arr[:-1]+[[v_pipe,'   ']])
             else:
                 tree(pwd+'/'+ls[i][1],arr[:-1]+[[" ",'   ']])
 
